@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<form action="/edit" method="POST">
+    <h4>수정 페이지</h4>
+    <input name="id" th:value="${data.id}" style="display:none">
+    <input name="title" th:value="${data.title}">
+    <input name="content" th:value="${data.content}">
+    <button type="submit">입력</button>
+</form>
+</body>
+</html>
+<!--id값을 안넣어주면 다음 id값에 내용이 추가된다.-->
