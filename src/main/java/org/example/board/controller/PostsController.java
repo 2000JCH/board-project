@@ -1,15 +1,13 @@
 package org.example.board.controller;
 
 import org.example.board.domain.Posts;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import lombok.RequiredArgsConstructor;
 import org.example.board.repository.PostsRepository;
 import org.example.board.service.PostsService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -68,6 +66,13 @@ public class PostsController {
     }
 
     //게시글 삭제
+    @DeleteMapping("/delete")
+    ResponseEntity<String> deletePosts(@RequestParam Long id){
+        postsRepository.deleteById(id);
+        return ResponseEntity.status(200).body("삭제완료");
+    }
+
+
     /*
     * 1. 게시글 삭제
     * 2. 회원 가입 및 로그인

@@ -13,6 +13,13 @@
         <a th:href="@{ '/detail/' + ${i.id} }">자세히 보기</a>
         <a th:href="@{ '/edit/' + ${i.id} }">✏️</a>
 
+        <span th:onclick="fetch('/delete?id=[[${i.id}]]', {method : 'DELETE'})
+            .then(r => r.text())
+            .then(() => {
+            location.reload();
+                console.log(text);  // 콘솔에 출력
+            })
+        ">🗑️</span>
     </div>
 </body>
 </html>
