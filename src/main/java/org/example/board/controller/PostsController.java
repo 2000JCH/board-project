@@ -1,6 +1,8 @@
 package org.example.board.controller;
 
+import org.example.board.domain.Comments;
 import org.example.board.domain.Posts;
+import org.example.board.repository.CommentsRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +11,7 @@ import org.example.board.service.PostsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -18,6 +21,7 @@ public class PostsController {
 
     private final PostsRepository postsRepository;
     private final PostsService postsService;
+    private final CommentsRepository commentsRepository;
 
     @GetMapping("/list")
     public String list(Model model) {
@@ -27,7 +31,7 @@ public class PostsController {
 
     //게시글 작성
     @GetMapping("/write")
-    public String write(Model model) {
+    public String write() {
         return "/board/write";
     }
     @PostMapping("/add")
@@ -39,8 +43,11 @@ public class PostsController {
     //게시글 상세보기
     @GetMapping("/detail/{id}")
     public String detail(@PathVariable Long id, Model model) {
+        List<Comments> allComments = commentsRepository.findAllByParentId(id);
+
         Optional<Posts> result = postsRepository.findById(id);
         if (result.isPresent()) {
+            model.addAttribute("comments", allComments);
             model.addAttribute("data", result.get());
             return "/board/detail";
         } else {
@@ -76,7 +83,6 @@ public class PostsController {
     /*
     * 1. 게시글 삭제
     * 2. 회원 가입 및 로그인
-    * 3. 회원 삭제
     * 4. 댓글 등록
     * 5. 댓글 목록 조회
     * 6. 댓글 삭제
