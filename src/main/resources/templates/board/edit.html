@@ -8,6 +8,8 @@
     <title>Document</title>
 </head>
 <body>
+    <div th:replace="~{ board/nav.html::navbar }"></div>
+
 <form action="/edit" method="POST">
     <h4>수정 페이지</h4>
     <input name="id" th:value="${data.id}" style="display:none">

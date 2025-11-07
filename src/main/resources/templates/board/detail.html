@@ -8,6 +8,8 @@
     <title>Document</title>
 </head>
 <body>
+    <div th:replace="~{ board/nav.html::navbar }"></div>
+
     <h4>상세페이지</h4>
     <h4 th:text="${data.title}"></h4>
     <p th:text="${data.content}"></p>

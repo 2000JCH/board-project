@@ -23,6 +23,15 @@ public class SecurityConfig {
                 .requestMatchers("/**").permitAll()
         );
 
+        http.formLogin((formLogin) -> formLogin
+                .loginPage("/login")
+                //.loginProcessingUrl("/login")
+                .defaultSuccessUrl("/list", true)
+                .failureUrl("/login?error")
+        );
+
+        http.logout(logout -> logout.logoutUrl("/logout"));
+
 
         return http.build();
     }
