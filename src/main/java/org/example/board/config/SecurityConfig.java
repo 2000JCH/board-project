@@ -20,7 +20,9 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf((csrf) -> csrf.disable());
         http.authorizeHttpRequests((authorize) -> authorize
-                .requestMatchers("/**").permitAll()
+                .requestMatchers("/login", "/register").permitAll()
+                .requestMatchers("/edit/**").hasRole("ADMIN")
+                .requestMatchers("/**").hasAnyRole("USER", "ADMIN")
         );
 
         http.formLogin((formLogin) -> formLogin
@@ -32,6 +34,10 @@ public class SecurityConfig {
 
         http.logout(logout -> logout.logoutUrl("/logout"));
 
+        // 권한없을 때(403)
+        http.exceptionHandling(exception -> exception
+                .accessDeniedPage("/error403")
+        );
 
         return http.build();
     }

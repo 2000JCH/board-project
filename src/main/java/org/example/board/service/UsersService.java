@@ -13,13 +13,14 @@ public class UsersService {
     private final UsersRepository usersRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    public void addUsers(String username, String password, String email){
+    public void addUsers(String username, String password, String email, String role){
         Users users = new Users();
 
         users.setUsername(username);
         String hash = passwordEncoder.encode(password);
         users.setPassword(hash);
         users.setEmail(email);
+        users.setRole(role);
         usersRepository.save(users);
     }
 }

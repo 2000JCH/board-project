@@ -24,8 +24,8 @@ public class UsersController {
         return "/board/register";
     }
     @PostMapping("/addUsers")
-    public String addUsers(String username, String password, String email){
-        usersService.addUsers(username, password, email);
+    public String addUsers(String username, String password, String email, String role){
+        usersService.addUsers(username, password, email, role);
         return "redirect:/list";
     }
 

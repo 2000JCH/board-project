@@ -20,4 +20,6 @@ public class Users {
 
     @Column(unique = true,  nullable = false,  length = 50)
     private String email;
+
+    private String role;
 }
